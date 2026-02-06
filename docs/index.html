@@ -1,16 +1,340 @@
-AMREF SMS Consent – Internal Employee Alerts
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SMS Consent - American Refining Group</title>
+  <meta name="description" content="AMREF internal employee SMS consent for operational and incident alerts." />
 
-Employees may opt in to receive operational and incident-related SMS alerts from AMREF.
+  <style>
+    :root{
+      --arg-red:#a41e34;
+      --text:#1d1d1f;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --bg:#ffffff;
+      --bg-soft:#f8fafc;
+      --link:#0f4c81;
+      --max:980px;
+      --radius:10px;
+      --shadow:0 6px 22px rgba(0,0,0,.06);
+      --font: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
 
-Verbal Consent Process:
-During onboarding or incident-response setup, employees are verbally informed and asked for consent using the following script:
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.55;
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
 
+    /* Header (simple, WordPress-like) */
+    .topbar{
+      border-bottom:1px solid var(--border);
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+    .topbar__inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:180px;
+    }
+    .brand__mark{
+      width:34px;
+      height:34px;
+      border-radius:6px;
+      background:var(--arg-red);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.25);
+    }
+    .brand__name{
+      font-weight:700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+
+    .nav{
+      margin-left:auto;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .nav a{color:var(--muted)}
+    .nav a:hover{color:var(--text)}
+    .nav .pill{
+      border:1px solid var(--border);
+      padding:6px 10px;
+      border-radius:999px;
+      background:var(--bg-soft);
+    }
+
+    /* Main content */
+    main{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 18px 10px;
+    }
+    .page-title{
+      margin:6px 0 10px;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:-.5px;
+    }
+    .lead{
+      color:var(--muted);
+      max-width:72ch;
+      margin:0 0 22px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:18px 18px;
+      margin:14px 0;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .card p{margin:10px 0}
+    .callout{
+      border-left:4px solid var(--arg-red);
+      background:var(--bg-soft);
+      padding:14px 14px;
+      border-radius:8px;
+      margin:12px 0;
+    }
+    .script{
+      white-space:pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:13.5px;
+      background:#0b1020;
+      color:#e5e7eb;
+      border-radius:10px;
+      padding:14px 14px;
+      overflow:auto;
+      margin:10px 0 0;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .meta .kv{
+      border:1px dashed var(--border);
+      border-radius:10px;
+      padding:12px 12px;
+      background:#fff;
+    }
+    .kv .k{
+      font-size:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:4px;
+    }
+    .kv .v{
+      font-weight:600;
+    }
+    @media (max-width:760px){
+      .meta{grid-template-columns:1fr}
+      .nav{display:none} /* keep it clean on mobile */
+    }
+
+    /* Footer sections similar to Terms page */
+    .footer-wrap{
+      margin-top:22px;
+      border-top:1px solid var(--border);
+      background:#fff;
+    }
+    .footer{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:22px 18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+    }
+    .footer h3{
+      margin:0 0 10px;
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted);
+    }
+    .footer p, .footer li{margin:6px 0; color:#374151}
+    .footer ul{padding-left:18px; margin:8px 0}
+    .subfooter{
+      border-top:1px solid var(--border);
+      padding:12px 18px;
+      color:var(--muted);
+      font-size:13px;
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .subfooter .links{display:flex; gap:14px; flex-wrap:wrap}
+    .tag{
+      display:inline-block;
+      background:rgba(164,30,52,.08);
+      color:var(--arg-red);
+      border:1px solid rgba(164,30,52,.18);
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:600;
+      margin-left:6px;
+      vertical-align:middle;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar" role="banner">
+    <div class="topbar__inner">
+      <a class="brand" href="https://www.amref.com/" aria-label="American Refining Group Home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">American Refining Group</span>
+      </a>
+
+      <!-- Lightweight nav to resemble the site header without duplicating the full menu -->
+      <nav class="nav" aria-label="Primary">
+        <a href="https://www.amref.com/contact/" class="pill">Contact</a>
+        <a href="https://www.amref.com/careers/">Careers</a>
+        <a href="https://www.amref.com/terms-conditions/">Terms &amp; conditions</a>
+        <a href="https://www.amref.com/privacy-policy/">Privacy policy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main role="main">
+    <h1 class="page-title">SMS consent<span class="tag">Employees</span></h1>
+    <p class="lead">
+      This page documents the opt-in workflow and the exact verbal consent script used for internal AMREF operational and
+      incident-related SMS alerts. This is strictly non-marketing and intended for employee on-call/incident notification.
+    </p>
+
+    <section class="card" aria-label="Overview">
+      <h2>Purpose</h2>
+      <p>
+        AMREF sends low-volume SMS messages to employees for urgent operational and incident response notifications
+        (e.g., system outages, critical process alarms, or time-sensitive operational events).
+      </p>
+
+      <div class="meta">
+        <div class="kv">
+          <div class="k">Message type</div>
+          <div class="v">Operational / Incident alerts only</div>
+        </div>
+        <div class="kv">
+          <div class="k">Estimated frequency</div>
+          <div class="v">Rare (typically &lt; 100/month; often far less)</div>
+        </div>
+        <div class="kv">
+          <div class="k">Audience</div>
+          <div class="v">Internal employees only</div>
+        </div>
+        <div class="kv">
+          <div class="k">Marketing content</div>
+          <div class="v">None</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Opt-in workflow">
+      <h2>Opt-in workflow (verbal)</h2>
+      <p>
+        Employees are invited to opt in during onboarding or during on-call / incident-response setup. Participation is optional.
+        Consent is recorded internally (date/time, employee name, and phone number) and can be withdrawn at any time.
+      </p>
+
+      <div class="callout">
+        <strong>Important:</strong> Consent is not a condition of employment. Employees may opt out by replying <strong>STOP</strong>.
+      </div>
+
+      <h2>Verbal consent script</h2>
+      <p>The following script is read verbatim to each employee:</p>
+
+      <div class="script">
 "You agree to receive operational and incident-related SMS messages from AMREF.
 Message frequency is limited to urgent operational alerts only.
 Message and data rates may apply.
 Reply STOP at any time to opt out, or HELP for assistance.
 Consent is not a condition of employment."
+      </div>
 
-Consent is recorded internally.
-Employees may opt out at any time by replying STOP.
-These messages are strictly non-marketing and for internal operational use only.
+      <p>
+        After the employee agrees, AMREF sends a confirmation message to the phone number provided. Opt-out requests are honored immediately.
+      </p>
+    </section>
+
+    <section class="card" aria-label="Message samples">
+      <h2>Sample messages</h2>
+      <p><strong>Operational alert:</strong> AMREF Alert: Checklist Completed.</p>
+      <p><strong>Incident alert:</strong> AMREF Alert: Quality Test Failure detected.</p>
+      <p><strong>Help message:</strong> AMREF Alerts: Internal operational notifications only. Reply STOP to unsubscribe. Msg &amp; data rates may apply.</p>
+      <p><strong>Opt-in confirmation:</strong> AMREF Alerts: You are subscribed to operational SMS notifications. Reply STOP to unsubscribe or HELP for assistance.</p>
+    </section>
+  </main>
+
+  <div class="footer-wrap" role="contentinfo">
+    <div class="footer">
+      <div>
+        <h3>Contact ARG</h3>
+        <p><strong>American Refining Group</strong></p>
+        <p>77 North Kendall Avenue<br/>Bradford, PA 16701</p>
+        <p>Phone: 814-368-1200<br/>Fax: 814-368-1396</p>
+      </div>
+
+      <div>
+        <h3>Product inquiries</h3>
+        <p>
+          For more information about our quality petroleum products or to request a sample, please fill out the product information
+          request form. We look forward to working with you to better understand your business needs.
+        </p>
+        <ul>
+          <li><a href="https://www.amref.com/contact/">Contact us</a></li>
+          <li><a href="https://www.amref.com/contact/product-inquiries/">Request form</a></li>
+          <li><a href="https://www.amref.com/terms-conditions/">Terms and conditions</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subfooter">
+      <div>© American Refining Group, 2026. All rights reserved.</div>
+      <div class="links">
+        <a href="https://www.amref.com/privacy-policy/">Privacy policy</a>
+        <a href="https://www.amref.com/terms-conditions/">Terms and conditions</a>
+        <a href="https://www.amref.com/cookie-policy/">Cookie policy</a>
+        <a href="https://www.amref.com/sitemap/">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
